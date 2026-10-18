@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book a court at ElevenLabs Padel Club</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #14261c;
+        --muted: #4e6358;
+        --paper: #f4f7f4;
+        --card: #ffffff;
+        --line: #d5e4db;
+        --green: #0d7a4b;
+        --green-dark: #0a5c38;
+        --green-soft: #e7f6ee;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(900px 420px at 50% -8%, #d7f3e3, transparent 60%),
+          var(--paper);
+      }
+      main {
+        width: min(32rem, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 12vh 0 3rem;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 1.75rem 1.4rem 1.5rem;
+        box-shadow: 0 18px 50px rgba(20, 38, 28, 0.07);
+      }
+      .eyebrow {
+        margin: 0 0 0.7rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--green);
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(1.7rem, 5.4vw, 2.2rem);
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        font-weight: 680;
+      }
+      .lede {
+        margin: 0.85rem 0 0;
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 1rem;
+      }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-top: 1.4rem;
+      }
+      button {
+        appearance: none;
+        border: 0;
+        min-height: 3.25rem;
+        padding: 0.8rem 1rem;
+        border-radius: 14px;
+        font: inherit;
+        font-size: 1.05rem;
+        font-weight: 680;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        cursor: pointer;
+      }
+      button svg { width: 1.15rem; height: 1.15rem; flex: none; }
+      button:focus-visible {
+        outline: 3px solid #8ed4b0;
+        outline-offset: 2px;
+      }
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+      }
+      #call {
+        background: var(--green);
+        color: #fff;
+      }
+      #call:hover:not(:disabled) { background: var(--green-dark); }
+      #call[aria-pressed="true"] { background: var(--green-dark); }
+      #chat {
+        background: var(--green-soft);
+        color: var(--green-dark);
+      }
+      #chat:hover:not(:disabled) { background: #d7f0e3; }
+      #chat[aria-pressed="true"] {
+        background: #d7f0e3;
+        box-shadow: inset 0 0 0 2px var(--green);
+      }
+      .status {
+        min-height: 1.4rem;
+        margin: 0.9rem 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
+      .status.failure {
+        color: #6d2e12;
+        background: #fff4ec;
+        border: 1px solid #f0d2c2;
+        border-radius: 12px;
+        padding: 0.85rem 0.95rem;
+      }
+      .note {
+        margin: 0.9rem 0 0;
+        padding: 0.85rem 0.95rem;
+        border-radius: 12px;
+        background: var(--paper);
+        color: var(--muted);
+        line-height: 1.45;
+        font-size: 0.92rem;
+      }
+      code { font-size: 0.88em; }
+      @media (max-width: 520px) {
+        main { padding-top: 1.25rem; }
+        .card { padding: 1.35rem 1.05rem 1.2rem; border-radius: 20px; }
+        .actions { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <p class="eyebrow">Court booking</p>
+        <h1>Book a court at ElevenLabs Padel Club</h1>
+        <p class="lede">Call for a voice conversation, or open a text chat. Both use the same assistant.</p>
+        <div class="actions">
+          <button id="call" type="button" aria-pressed="false" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6.5 4.5h3l1.5 3.5-2 1.2a12 12 0 0 0 5.8 5.8l1.2-2 3.5 1.5v3A2 2 0 0 1 17.5 19 14 14 0 0 1 5 6.5a2 2 0 0 1 1.5-2z"/>
+            </svg>
+            Call
+          </button>
+          <button id="chat" type="button" aria-pressed="false" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 17.5 4 20V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7A2.5 2.5 0 0 1 17.5 16H8z"/>
+            </svg>
+            Chat
+          </button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+        <p class="note" id="setup">
+          Set <code>ELEVENLABS_AGENT_ID</code> and reload. Call and Chat then open a conversation with that agent.
+        </p>
+      </section>
+    </main>
+    <script>
+      /* notice-api */
+      var CREDITS_NOTICE = "This booking assistant has run out of credits and can't take bookings right now. Please try again later.";
+      var UNAVAILABLE_NOTICE = "The assistant is unavailable right now, please try again later.";
+
+      function detailText(detail) {
+        if (detail == null) return "";
+        if (typeof detail === "string") return detail;
+        if (typeof detail === "number" || typeof detail === "boolean") return String(detail);
+        if (typeof detail === "object") {
+          if (typeof detail.message === "string" || typeof detail.reason === "string" || detail.status != null || detail.code != null) {
+            return [detail.message, detail.reason, detail.status, detail.code].filter((part) => part != null).map(detailText).join(" ");
+          }
+          try { return JSON.stringify(detail); } catch { return String(detail); }
+        }
+        return String(detail);
+      }
+
+      function isQuotaFailure(detail) {
+        const text = detailText(detail).toLowerCase();
+        return /(?:^|[^a-z])(?:quota|credits?|limit)(?:[^a-z]|$)|(?:^|[^0-9])(?:402|429)(?:[^0-9]|$)/.test(text);
+      }
+
+      function isStartFailure(detail) {
+        const value = detailText(detail).toLowerCase();
+        if (!value.trim()) return false;
+        if (value.includes("cannot fetch config")) return true;
+        if (value.includes("could not start")) return true;
+        if (value.includes("an error occurred")) return true;
+        if (value.includes("disconnected due to an error")) return true;
+        if (value.includes("failed to load")) return true;
+        if (/http\s+[45]\d\d\b/.test(value) && /elevenlabs|convai/.test(value)) return true;
+        if (/^(?!1000\b)(?!1001\b)1\d{3}\b/.test(value.trim())) return true;
+        return false;
+      }
+
+      function noticeFor(detail, started) {
+        if (isQuotaFailure(detail)) return CREDITS_NOTICE;
+        if (!started && isStartFailure(detail)) return UNAVAILABLE_NOTICE;
+        return "";
+      }
+      /* notice-api-end */
+
+      const agentId = "__ELEVENLABS_AGENT_ID__";
+      const callButton = document.getElementById("call");
+      const chatButton = document.getElementById("chat");
+      const status = document.getElementById("status");
+      const setup = document.getElementById("setup");
+      const configured = Boolean(agentId) && !agentId.startsWith("__");
+
+      let widgetReady = false;
+      let readyWaiters = [];
+      let generation = 0;
+      let active = null;
+      let restoreHooks = () => {};
+
+      function showFailure(message) {
+        status.textContent = message;
+        status.classList.add("failure");
+        status.setAttribute("role", "alert");
+      }
+
+      function clearFailure() {
+        status.classList.remove("failure");
+        status.setAttribute("role", "status");
+      }
+
+      function requestUrl(input) {
+        if (typeof input === "string") return input;
+        if (input instanceof URL) return input.href;
+        if (input && typeof input.url === "string") return input.url;
+        return "";
+      }
+
+      function installHooks(onDetail) {
+        restoreHooks();
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        const originalFetch = window.fetch.bind(window);
+        const NativeWebSocket = window.WebSocket;
+
+        function reportConsole(args) {
+          const text = args.map(detailText).join(" ");
+          if (text.includes("[ConversationalAI]") || (/elevenlabs|convai/i.test(text) && isQuotaFailure(text))) onDetail(text);
+        }
+
+        console.error = (...args) => {
+          originalError.apply(console, args);
+          reportConsole(args);
+        };
+        console.warn = (...args) => {
+          originalWarn.apply(console, args);
+          reportConsole(args);
+        };
+
+        window.fetch = async (...args) => {
+          const url = requestUrl(args[0]);
+          try {
+            const response = await originalFetch(...args);
+            if (/elevenlabs|convai/i.test(url)) {
+              if (!response.ok) {
+                let body = "";
+                try { body = (await response.clone().text()).slice(0, 300); } catch { body = ""; }
+                onDetail(`HTTP ${response.status} ${url} ${body}`);
+              }
+            }
+            return response;
+          } catch (error) {
+            if (/elevenlabs|convai/i.test(url)) onDetail(error);
+            throw error;
+          }
+        };
+
+        function PatchedWebSocket(url, protocols) {
+          const socket = protocols === undefined ? new NativeWebSocket(url) : new NativeWebSocket(url, protocols);
+          socket.addEventListener("close", (event) => {
+            if (event.code === 1000 || event.code === 1001) {
+              if (isQuotaFailure(event.reason || "")) onDetail(event.reason || "");
+              return;
+            }
+            onDetail(`${event.code} ${event.reason || ""}`);
+          });
+          return socket;
+        }
+        PatchedWebSocket.prototype = NativeWebSocket.prototype;
+        Object.setPrototypeOf(PatchedWebSocket, NativeWebSocket);
+        window.WebSocket = PatchedWebSocket;
+
+        restoreHooks = () => {
+          console.error = originalError;
+          console.warn = originalWarn;
+          window.fetch = originalFetch;
+          window.WebSocket = NativeWebSocket;
+          restoreHooks = () => {};
+        };
+      }
+
+      function whenReady() {
+        if (widgetReady) return Promise.resolve();
+        return new Promise((resolve) => readyWaiters.push(resolve));
+      }
+
+      function setMode(mode) {
+        callButton.setAttribute("aria-pressed", mode === "call" ? "true" : "false");
+        chatButton.setAttribute("aria-pressed", mode === "chat" ? "true" : "false");
+      }
+
+      function stopActive() {
+        restoreHooks();
+        if (!active) return;
+        active.stop();
+        active.widget.remove();
+        active = null;
+        setMode("");
+      }
+
+      function watchFailures(widget, token) {
+        let started = false;
+        let reported = false;
+        const report = (detail) => {
+          if (reported || token !== generation || !widget.isConnected) return;
+          const visible = widget.shadowRoot?.textContent || "";
+          if (/\b(listening|speaking)\b/i.test(visible)) started = true;
+          const message = noticeFor(detail, started);
+          if (!message) return;
+          reported = true;
+          showFailure(message);
+          stopActive();
+        };
+        installHooks(report);
+        const readWidget = () => {
+          const text = widget.shadowRoot?.textContent || "";
+          if (/\b(listening|speaking)\b/i.test(text)) started = true;
+          if (/an error occurred|could not start/i.test(text)) report(text);
+        };
+        const observer = new MutationObserver(readWidget);
+        const arm = () => {
+          const root = widget.shadowRoot;
+          if (!root) return;
+          observer.disconnect();
+          observer.observe(root, { childList: true, subtree: true, characterData: true });
+        };
+        const timer = setInterval(() => {
+          arm();
+          readWidget();
+        }, 300);
+        arm();
+        return () => {
+          observer.disconnect();
+          clearInterval(timer);
+        };
+      }
+
+      function watch(widget, match, onFound, onTimeout) {
+        let stopped = false;
+        let observer = null;
+        const stop = () => {
+          stopped = true;
+          observer?.disconnect();
+          clearInterval(timer);
+          clearTimeout(killer);
+        };
+        const tryFind = () => {
+          if (stopped || !widget.isConnected) return false;
+          const root = widget.shadowRoot;
+          if (!root) return false;
+          const found = [...root.querySelectorAll("button, textarea")].find(match);
+          if (!found) return false;
+          onFound(found);
+          return true;
+        };
+        const arm = () => {
+          const root = widget.shadowRoot;
+          if (!root) return;
+          observer?.disconnect();
+          observer = new MutationObserver(() => {
+            if (tryFind()) stop();
+          });
+          observer.observe(root, { childList: true, subtree: true, attributes: true });
+        };
+        const timer = setInterval(() => {
+          arm();
+          if (tryFind()) stop();
+        }, 200);
+        const killer = setTimeout(() => {
+          if (!stopped && onTimeout) onTimeout();
+          stop();
+        }, 10000);
+        arm();
+        if (tryFind()) stop();
+        return stop;
+      }
+
+      function openConversation(mode) {
+        stopActive();
+        const widget = document.createElement("elevenlabs-convai");
+        widget.setAttribute("agent-id", agentId);
+        widget.setAttribute("always-expanded", "true");
+        widget.setAttribute("variant", "full");
+        widget.setAttribute("placement", "bottom");
+        widget.setAttribute("transcript", "true");
+        if (mode === "chat") {
+          widget.setAttribute("override-text-only", "true");
+          widget.setAttribute("text-input", "true");
+        } else {
+          widget.setAttribute("text-contents", JSON.stringify({ start_call: "Start a call" }));
+        }
+        const stops = [];
+        active = { mode, widget, stop() { stops.forEach((fn) => fn()); } };
+        stops.push(watchFailures(widget, generation));
+        document.body.appendChild(widget);
+        setMode(mode);
+        if (mode === "call") {
+          status.textContent = "Starting the voice call…";
+          stops.push(watch(
+            widget,
+            (el) => {
+              if (el.tagName !== "BUTTON" || el.disabled) return false;
+              const label = `${el.getAttribute("aria-label") || ""} ${el.textContent || ""}`.replace(/\s+/g, " ").trim().toLowerCase();
+              return label.includes("start a call");
+            },
+            (button) => {
+              button.click();
+              status.textContent = "Voice call is open.";
+            },
+            () => {
+              if (status.textContent === "Starting the voice call…") status.textContent = "The call panel is open.";
+            },
+          ));
+        } else {
+          status.textContent = "Text chat is open.";
+          stops.push(watch(
+            widget,
+            (el) => el.tagName === "TEXTAREA",
+            (field) => field.focus(),
+          ));
+        }
+      }
+
+      async function ensureWidget() {
+        await whenReady();
+      }
+
+      callButton.addEventListener("click", async () => {
+        const token = ++generation;
+        clearFailure();
+        status.textContent = "Starting the voice call…";
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          stream.getTracks().forEach((track) => track.stop());
+        } catch {
+          if (token !== generation) return;
+          status.textContent = "Allow the microphone to start the call.";
+          return;
+        }
+        if (token !== generation) return;
+        await ensureWidget();
+        if (token !== generation) return;
+        openConversation("call");
+      });
+
+      chatButton.addEventListener("click", async () => {
+        const token = ++generation;
+        clearFailure();
+        status.textContent = "Opening text chat…";
+        await ensureWidget();
+        if (token !== generation) return;
+        openConversation("chat");
+      });
+
+      if (configured) {
+        setup.hidden = true;
+        callButton.disabled = false;
+        chatButton.disabled = false;
+        const script = document.createElement("script");
+        script.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
+        script.async = true;
+        script.onload = () => {
+          widgetReady = true;
+          readyWaiters.splice(0).forEach((resolve) => resolve());
+        };
+        script.onerror = () => {
+          callButton.disabled = true;
+          chatButton.disabled = true;
+          showFailure(UNAVAILABLE_NOTICE);
+        };
+        document.body.appendChild(script);
+      }
+    </script>
+  </body>
+</html>
