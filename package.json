@@ -1,5 +1,5 @@
 {
-  "name": "padel-voice-agent",
+  "name": "gocourt-elevenlabs-agent",
   "version": "1.0.0",
   "description": "ElevenLabs voice receptionist for padel clubs: checks availability, quotes prices and books courts in Greek or English.",
   "license": "MIT",

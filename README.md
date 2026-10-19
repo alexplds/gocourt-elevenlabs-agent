@@ -1,4 +1,4 @@
-# Padel voice agent
+# GoCourt ElevenLabs agent
 
 A small service that lets an [ElevenLabs](https://elevenlabs.io) voice agent book and cancel padel courts on GoCourt. It signs in as a club-owner (or staff) account and calls GoCourt's existing API. The GoCourt codebase is not modified.
 
@@ -152,7 +152,7 @@ The GoCourt JWT lives in the function instance. A warm instance reuses it. A new
 Leave `ELEVENLABS_API_KEY` and `ELEVENLABS_TOOL_SECRET_ID` off Vercel. The upsert script reads them on your machine. `TOOL_PUBLIC_BASE_URL` is not read by the function; set it locally in the next step.
 
 4. Deploy.
-5. Copy the deployment origin, for example `https://padel-voice-agent.vercel.app`. No path and no trailing slash.
+5. Copy the deployment origin, for example `https://gocourt-elevenlabs-agent.vercel.app`. No path and no trailing slash.
 6. In the local `.env`, set `TOOL_PUBLIC_BASE_URL` to that origin.
 7. Run `npm run agent:upsert`. That registers `https://<that-host>/tools/check_availability` (and the other three tools) and the `x-tool-secret` header.
 8. Open `https://<that-host>/health`. A live deploy returns `{ "status": "ok", "mock": false }`.
